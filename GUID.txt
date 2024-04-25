@@ -1,0 +1,20 @@
+Para update bd, usar o cmd?
+alembic upgrade head
+
+
+Server:
+user: pyUser
+psw: superuser
+
+flask db init
+flask db migrate -m "migration description"
+flask db upgrade
+
+JWT:
+InnerFriend_TechMind
+7a8dc541e902353992ddff8f5eed5097
+
+
+Comando para adicionar as requirements:
+pip install -r requirements.txt
+
