@@ -15,3 +15,16 @@ class ResumingTalkService:
         db.session.add(new_resuming_talk)
         db.session.commit()
         return new_resuming_talk
+    
+    @staticmethod
+    def update_resuming_talks(id, data):
+        resuming_talks = ResumingTalks.query.filter_by(id = id).first()
+
+        if not resuming_talks:
+            raise ValueError("Resuming_talks not found")
+
+        for key, value in data.items():
+            setattr(resuming_talks, key, value)
+
+        db.session.commit()
+        return resuming_talks

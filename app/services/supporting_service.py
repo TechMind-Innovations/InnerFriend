@@ -15,3 +15,16 @@ class SupportingTalkService:
         db.session.add(new_supporting_talk)
         db.session.commit()
         return new_supporting_talk
+    
+    @staticmethod
+    def update_supporting_talks(id, data):
+        supporting_talks = SupportingTalks.query.filter_by(id = id).first()
+
+        if not supporting_talks:
+            raise ValueError("Resuming_talks not found")
+
+        for key, value in data.items():
+            setattr(supporting_talks, key, value)
+
+        db.session.commit()
+        return supporting_talks

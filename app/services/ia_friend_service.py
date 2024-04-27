@@ -21,3 +21,15 @@ class IA_FriendService:
         db.session.add(new_ia)
         db.session.commit()
         return new_ia
+    @staticmethod
+    def update_ia_friend(user_id, data):
+        ia_friend = IA_Friend.query.filter_by(user_id = user_id).first()
+
+        if not ia_friend:
+            raise ValueError("User not has IA_Friend")
+
+        for key, value in data.items():
+            setattr(ia_friend, key, value)
+
+        db.session.commit()
+        return ia_friend

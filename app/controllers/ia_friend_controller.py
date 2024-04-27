@@ -20,4 +20,16 @@ class IA_FriendController:
             return jsonify({"error": f"Missing field: {str(e)}"}), 400
         except Exception as e:
             return jsonify({"error": "Server error"}), 500 
+        
+    def update_ia_friend(self):
+        user_id = get_jwt_identity()
+        data = request.get_json()
+        data.pop('user_id',None)
+        try:
+            ia_friend = IA_FriendService.update_ia_friend(user_id, data)
+            return jsonify({"id": ia_friend.id, "name": ia_friend.name}), 200
+        except ValueError as e:
+            return jsonify({"error": str(e)}), 400
+        except Exception as e:
+            return jsonify({"error": "Server error"}), 500
 
