@@ -18,3 +18,15 @@ class SupportingTalkController:
             return jsonify({"error": f"Missing field: {str(e)}"}), 400
         except Exception as e:
             return jsonify({"error": "Server error"}), 500
+        
+    def update_supporting_talks(self):
+        id = request.args.get('id')
+        data = request.get_json()
+        data.pop('user_id',None)
+        try:
+            supporting_talks = SupportingTalkService.update_supporting_talks(id, data)
+            return jsonify({"id": supporting_talks.id, "message": supporting_talks.message}), 200
+        except ValueError as e:
+            return jsonify({"error": str(e)}), 400
+        except Exception as e:
+            return jsonify({"error": "Server error"}), 500

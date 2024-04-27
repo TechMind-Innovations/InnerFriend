@@ -18,3 +18,15 @@ class ResumingTalkController:
             return jsonify({"error": f"Missing field: {str(e)}"}), 400
         except Exception as e:
             return jsonify({"error": "Server error"}), 500
+        
+    def update_resuming_talks(self):
+        id = request.args.get('id')
+        data = request.get_json()
+        data.pop('user_id',None)
+        try:
+            resuming_talks = ResumingTalkService.update_resuming_talks(id, data)
+            return jsonify({"id": resuming_talks.id, "message": resuming_talks.message}), 200
+        except ValueError as e:
+            return jsonify({"error": str(e)}), 400
+        except Exception as e:
+            return jsonify({"error": "Server error"}), 500
