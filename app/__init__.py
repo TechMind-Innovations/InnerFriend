@@ -7,6 +7,7 @@ import logging
 from .extensions import db, bcrypt, jwt
 from datetime import timedelta
 
+
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
@@ -17,7 +18,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
-    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(minutes=2)
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(minutes=30)
 
     db.init_app(app)
     bcrypt.init_app(app)
@@ -32,7 +33,8 @@ def create_app():
         from .models.supporting_talks import SupportingTalks
         from .models.user_photo import UserPhoto
         
-    from .routes import user_bp
-    app.register_blueprint(user_bp, url_prefix='/inner-friend')
+    from .routes import user_bp, ia_friend_bp
+    app.register_blueprint(user_bp, url_prefix='/user')
+    app.register_blueprint(ia_friend_bp, url_prefix='/ia_friend')
 
     return app
