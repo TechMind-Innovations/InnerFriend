@@ -1,4 +1,3 @@
-# __init__.py
 from flask import Flask
 from flask_migrate import Migrate
 import os
@@ -33,8 +32,10 @@ def create_app():
         from .models.supporting_talks import SupportingTalks
         from .models.user_photo import UserPhoto
         
-    from .routes import user_bp, ia_friend_bp
+    from .routes import user_bp, ia_friend_bp, supporting_talks_bp, resuming_talks_bp
     app.register_blueprint(user_bp, url_prefix='/user')
     app.register_blueprint(ia_friend_bp, url_prefix='/ia_friend')
+    app.register_blueprint(supporting_talks_bp, url_prefix='/supporting_talks')
+    app.register_blueprint(resuming_talks_bp, url_prefix='/resuming_talks')
 
     return app
