@@ -8,13 +8,13 @@ class UserService:
     def create_user(name, social_name, year, email, password, sex, region):
         if User.query.filter_by(email=email).first():
             raise ValueError("Email already exists!")
-        password_hash = bcrypt.generate_password_hash(password).decode('utf-8')  # Correção aqui
+        password_hash = bcrypt.generate_password_hash(password).decode('utf-8')  
         new_user = User(
             name=name,
             social_name=social_name,
             year=year,
             email=email,
-            password=password_hash,  # Use o hash
+            password=password_hash,  
             sex=sex,
             region=region
         )
@@ -36,4 +36,17 @@ class UserService:
         user = User.query.get(user_id)
         if not user:
             raise ValueError("User not found")
+        return user
+    
+    @staticmethod
+    def update_user(user_id, data):
+        
+        user = User.query.get(user_id)
+        if not user:
+            raise ValueError("User not found")
+
+        for key, value in data.items():
+            setattr(user, key, value)
+
+        db.session.commit()
         return user

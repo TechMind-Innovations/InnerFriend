@@ -39,4 +39,15 @@ class UserController:
             return jsonify(user.serialize()), 200  # Usando o método serialize aqui
         except Exception as e:
             return jsonify({"error": str(e)}), 404
-
+        
+    def update_user(self):
+        user_id = request.args.get('user_id')
+        data = request.get_json()
+        data.pop('password', None)
+        try:
+            updated_user = UserService.update_user(user_id, data)
+            return jsonify({"id": updated_user.id, "name": updated_user.name, "email": updated_user.email}), 200
+        except ValueError as e:
+            return jsonify({"error": str(e)}), 400
+        except Exception as e:
+            return jsonify({"error": "Server error"}), 500
