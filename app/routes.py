@@ -1,6 +1,8 @@
 from flask import Blueprint
 from .controllers.user_controller import UserController
 from .controllers.ia_friend_controller import IA_FriendController
+from .controllers.resuming_controller import ResumingTalkController
+from .controllers.supporting_controller import SupportingTalkController
 from flask_jwt_extended import jwt_required
 
 #User
@@ -9,6 +11,12 @@ user_controller = UserController()
 #Ia_Friend
 ia_friend_bp = Blueprint('ia_friend_bp', __name__)
 ia_friend_controller = IA_FriendController()
+#resuming_talks
+resuming_talks_bp = Blueprint('resuming_talks_bp', __name__)
+resuming_talks_controller = ResumingTalkController()
+#supporintg_talks
+supporting_talks_bp = Blueprint('supporting_talks_bp', __name__)
+supporting_talks_controller = SupportingTalkController()
 
 #/user
 @user_bp.route('/create', methods=['POST'])
@@ -36,3 +44,13 @@ def create_ia_friend():
     return ia_friend_controller.create_ia_friend()
 
 #/resuming_talks
+@resuming_talks_bp.route('/create', methods=['POST'])
+@jwt_required()
+def create_resuming_talks():
+    return resuming_talks_controller.create_resuming_talks()
+
+#/supporting_talks
+@supporting_talks_bp.route('/create', methods=['POST'])
+@jwt_required()
+def create_supporting_talks():
+    return supporting_talks_controller.create_supporting_talks()

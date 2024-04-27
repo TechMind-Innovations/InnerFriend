@@ -36,7 +36,7 @@ class UserController:
         user_id = get_jwt_identity()
         try:
             user = UserService.get_user_details(user_id)
-            return jsonify(user.serialize()), 200  # Usando o método serialize aqui
+            return jsonify(user.serialize()), 200 
         except Exception as e:
             return jsonify({"error": str(e)}), 404
         
