@@ -3,11 +3,22 @@ from ..models.user import User
 from werkzeug.security import check_password_hash
 from flask_jwt_extended import create_access_token
 
+def adjust_sex(sex):
+    if sex.lower() == 'female':
+        sex = 'Female'
+    elif sex.lower() == 'male':
+        sex = 'Male'
+    elif sex.lower() == 'other':
+        sex = 'Other'
+    return sex
+
 class UserService:
     @staticmethod
     def create_user(name, social_name, year, email, password, sex, region):
         if User.query.filter_by(email=email).first():
             raise ValueError("Email already exists!")
+        sex = adjust_sex(sex)
+        
         password_hash = bcrypt.generate_password_hash(password).decode('utf-8')  
         new_user = User(
             name=name,
