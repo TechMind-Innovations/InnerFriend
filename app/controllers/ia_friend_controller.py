@@ -32,4 +32,24 @@ class IA_FriendController:
             return jsonify({"error": str(e)}), 400
         except Exception as e:
             return jsonify({"error": "Server error"}), 500
+        
+    def get_ia_friend(self):
+        user_id = get_jwt_identity()
+        try:
+            ia_friend = IA_FriendService.get_ia_friend(user_id)
+            ia_friend_data = {
+            "id": ia_friend.id,
+            "name": ia_friend.name,
+            "sex_ia": ia_friend.sex_ia.name,
+            "age_average": ia_friend.age_average,
+            "user_id": ia_friend.user_id
+            }
+            return jsonify(ia_friend_data), 200
+        except ValueError as e:
+            return jsonify({"error": str(e)}), 404
+        except Exception as e:
+            import traceback
+            print(traceback.format_exc())
+            return jsonify({"error": "Server error"}), 500
+
 

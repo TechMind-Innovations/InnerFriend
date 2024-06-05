@@ -47,6 +47,12 @@ def create_ia_friend():
 @jwt_required()
 def update_ia_friend():
     return ia_friend_controller.update_ia_friend()
+
+@ia_friend_bp.route('/getIA', methods=['GET'])
+@jwt_required()
+def get_ia_friend():
+    return ia_friend_controller.get_ia_friend()
+
 #/resuming_talks
 @resuming_talks_bp.route('/create', methods=['POST'])
 @jwt_required()
