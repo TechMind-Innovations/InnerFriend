@@ -16,6 +16,8 @@ def create_app():
     CORS(app)
     load_dotenv()
 
+    print("DATABASE_URL:", os.getenv('DATABASE_URL'))
+
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
