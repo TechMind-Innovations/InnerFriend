@@ -1,6 +1,7 @@
 from ..extensions import db
 from ..models.user import User
 from ..models.resuming_talks import ResumingTalks
+from sqlalchemy import func
 
 class ResumingTalkService:
     @staticmethod
@@ -28,3 +29,12 @@ class ResumingTalkService:
 
         db.session.commit()
         return resuming_talks
+    
+    def get_resuming_talks(user_id, created_on):
+        supporting_talks = ResumingTalks.query.filter(
+            ResumingTalks.user_id == user_id,
+            func.date(ResumingTalks.created_on) == created_on
+        ).first()
+        if supporting_talks is None:
+            raise ValueError("User does not have any supporting talks for the specified date")
+        return supporting_talks

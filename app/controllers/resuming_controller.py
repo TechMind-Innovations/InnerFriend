@@ -1,6 +1,7 @@
 from ..services.resuming_service import ResumingTalkService
 from flask import request, jsonify
 from flask_jwt_extended import get_jwt_identity
+from datetime import datetime
 
 class ResumingTalkController:
     def create_resuming_talks(self):
@@ -30,3 +31,28 @@ class ResumingTalkController:
             return jsonify({"error": str(e)}), 400
         except Exception as e:
             return jsonify({"error": "Server error"}), 500
+        
+    def get_resumingTalks(self):
+        user_id = get_jwt_identity()
+        date_str = request.args.get('date')
+        if not date_str:
+            return jsonify({"error": "Date header is missing"}), 400
+        try:
+            date = datetime.strptime(date_str, '%Y-%m-%d').date()
+            resumingTalks = ResumingTalkService.get_resuming_talks(user_id, date)
+            resumingTalksData = {
+                "id": resumingTalks.id,
+                "message": resumingTalks.message,
+                "created_on": resumingTalks.created_on,
+                "updated_on": resumingTalks.updated_on,
+                "user_id": resumingTalks.user_id
+            }
+            return jsonify(resumingTalksData), 200
+        except ValueError as e:
+            return jsonify({"error": str(e)}), 404
+        except Exception as e:
+            import traceback
+            print(traceback.format_exc())
+            return jsonify({"error": "Server error"}), 500
+        
+        
