@@ -37,6 +37,11 @@ def auth_user():
 def detail_user():
     return user_controller.detail_user()
 
+@user_bp.route('/upsert_photo', methods=['POST'])
+@jwt_required()
+def upsert_photo():
+    return user_controller.upsert_photo()
+
 #/ia_friend
 @ia_friend_bp.route('/create', methods=['POST'])
 @jwt_required()
