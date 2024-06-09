@@ -35,8 +35,8 @@ class UserController:
     def detail_user(self):
         user_id = get_jwt_identity()
         try:
-            user = UserService.get_user_details(user_id)
-            return jsonify(user.serialize()), 200 
+            user_data = UserService.get_user_details(user_id)
+            return jsonify(user_data), 200  # Removido o .serialize()
         except Exception as e:
             return jsonify({"error": str(e)}), 404
         
@@ -51,3 +51,15 @@ class UserController:
             return jsonify({"error": str(e)}), 400
         except Exception as e:
             return jsonify({"error": "Server error"}), 500
+        
+    def upsert_photo(self):
+            user_id = get_jwt_identity()
+            photo_data = request.files['photo'].read()  # Assumindo que a foto é enviada como um arquivo
+
+            try:
+                updated_photo = UserService.upsert_photo(user_id, photo_data)
+                return jsonify({"id": updated_photo.id, "user_id": updated_photo.id, "updated_on": updated_photo.updated_on}), 200
+            except ValueError as e:
+                return jsonify({"error": str(e)}), 400
+            except Exception as e:
+                return jsonify({"error": "Server error"}), 500
