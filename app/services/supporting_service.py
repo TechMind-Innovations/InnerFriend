@@ -1,6 +1,7 @@
 from ..extensions import db
 from ..models.user import User
 from ..models.supporting_talks import SupportingTalks
+from sqlalchemy import func
 
 class SupportingTalkService:
     @staticmethod
@@ -27,4 +28,14 @@ class SupportingTalkService:
             setattr(supporting_talks, key, value)
 
         db.session.commit()
+        return supporting_talks
+    
+    @staticmethod
+    def get_supporting_talks(user_id, created_on):
+        supporting_talks = SupportingTalks.query.filter(
+            SupportingTalks.user_id == user_id,
+            func.date(SupportingTalks.created_on) == created_on
+        ).first()
+        if supporting_talks is None:
+            raise ValueError("User does not have any supporting talks for the specified date")
         return supporting_talks

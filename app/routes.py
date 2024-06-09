@@ -64,6 +64,11 @@ def create_resuming_talks():
 def update_resuming_talks():
     return resuming_talks_controller.update_resuming_talks()
 
+@resuming_talks_bp.route('/get', methods=['GET'])
+@jwt_required()
+def get_resuming_talks():
+    return resuming_talks_controller.get_resumingTalks()
+
 #/supporting_talks
 @supporting_talks_bp.route('/create', methods=['POST'])
 @jwt_required()
@@ -74,3 +79,8 @@ def create_supporting_talks():
 @jwt_required()
 def update_supporting_talks():
     return supporting_talks_controller.update_supporting_talks()
+
+@supporting_talks_bp.route('/get', methods=['GET'])
+@jwt_required()
+def get_supporting_talks():
+    return supporting_talks_controller.get_supportingTalks()
