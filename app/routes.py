@@ -24,6 +24,7 @@ def create_user():
     return user_controller.create_user()
 
 @user_bp.route('/update', methods=['PUT'])
+@jwt_required()
 def update_user():
     return user_controller.update_user()
 
