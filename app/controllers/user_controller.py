@@ -36,12 +36,12 @@ class UserController:
         user_id = get_jwt_identity()
         try:
             user_data = UserService.get_user_details(user_id)
-            return jsonify(user_data), 200  # Removido o .serialize()
+            return jsonify(user_data), 200 
         except Exception as e:
             return jsonify({"error": str(e)}), 404
         
     def update_user(self):
-        user_id = request.args.get('user_id')
+        user_id = get_jwt_identity()
         data = request.get_json()
         data.pop('password', None)
         try:

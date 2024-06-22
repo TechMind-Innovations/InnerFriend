@@ -65,7 +65,6 @@ class UserService:
     
     @staticmethod
     def update_user(user_id, data):
-        
         user = User.query.get(user_id)
         if not user:
             raise ValueError("User not found")
