@@ -14,5 +14,5 @@ class IA_Friend(db.Model):
     sex_ia = Column(Enum(SexEnumIA), nullable=False)
     age_average = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
+    photo = db.Column(db.String(255), nullable=True)
     user = db.relationship('User', back_populates='ia_friends')
