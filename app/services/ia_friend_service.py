@@ -5,7 +5,7 @@ from ..services.user_service import adjust_sex
 
 class IA_FriendService:
     @staticmethod
-    def create_ia_friend(name, sex_ia, age_average, user_id): 
+    def create_ia_friend(name, sex_ia, age_average, photo, user_id): 
         user = User.query.filter_by(id=user_id).first()
         ia_friend = IA_Friend.query.filter_by(user_id=user_id).first()
 
@@ -17,6 +17,7 @@ class IA_FriendService:
                 name=name,
                 sex_ia=adjust_sex(sex_ia),
                 age_average=age_average,
+                photo=photo,
                 user_id=user_id
             )
             db.session.add(ia_friend)
@@ -24,6 +25,7 @@ class IA_FriendService:
             ia_friend.name = name
             ia_friend.sex_ia = adjust_sex(sex_ia)
             ia_friend.age_average = age_average
+            ia_friend.photo = photo
 
         db.session.commit()
         return ia_friend

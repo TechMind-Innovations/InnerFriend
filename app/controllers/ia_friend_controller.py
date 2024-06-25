@@ -11,6 +11,7 @@ class IA_FriendController:
                 name=data['name'],
                 sex_ia=data['sex_ia'],
                 age_average=data['age_average'],
+                photo= data['photo'],
                 user_id=user
             )
             return({"id":ia_friend.id, "name":ia_friend.name}), 200
@@ -42,6 +43,7 @@ class IA_FriendController:
             "name": ia_friend.name,
             "sex_ia": ia_friend.sex_ia.name,
             "age_average": ia_friend.age_average,
+            "photo": ia_friend.photo,
             "user_id": ia_friend.user_id
             }
             return jsonify(ia_friend_data), 200
