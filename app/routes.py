@@ -3,6 +3,7 @@ from .controllers.user_controller import UserController
 from .controllers.ia_friend_controller import IA_FriendController
 from .controllers.resuming_controller import ResumingTalkController
 from .controllers.supporting_controller import SupportingTalkController
+from .controllers.chatbot_controller import ChatbotController
 from flask_jwt_extended import jwt_required
 
 #User
@@ -14,9 +15,12 @@ ia_friend_controller = IA_FriendController()
 #resuming_talks
 resuming_talks_bp = Blueprint('resuming_talks_bp', __name__)
 resuming_talks_controller = ResumingTalkController()
-#supporintg_talks
+#supporting_talks
 supporting_talks_bp = Blueprint('supporting_talks_bp', __name__)
 supporting_talks_controller = SupportingTalkController()
+#chatbot
+chatbot_bp = Blueprint('chatbot_bp', __name__)
+chatbot_controller = ChatbotController()
 
 #/user
 @user_bp.route('/create', methods=['POST'])
@@ -27,7 +31,6 @@ def create_user():
 @jwt_required()
 def update_user():
     return user_controller.update_user()
-
 
 @user_bp.route('/session', methods=['POST'])
 def auth_user():
@@ -90,3 +93,8 @@ def update_supporting_talks():
 @jwt_required()
 def get_supporting_talks():
     return supporting_talks_controller.get_supportingTalks()
+
+#/chatbot
+@chatbot_bp.route('/chat', methods=['POST'])
+def chat():
+    return chatbot_controller.chat()

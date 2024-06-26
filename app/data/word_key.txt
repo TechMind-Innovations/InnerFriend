@@ -1,0 +1,34 @@
+#Identificadores de sinais de suicídio ou morte
+
+-Palavras-Chave:
+    Suicídio
+    Morte
+    Acabar
+    Desaparecer
+    Fardo
+    Inútil
+    Desesperança
+    Despedida
+    Preparativos finais 
+
+-Frases Diretas:
+    "Eu quero morrer."
+    "Eu não aguento mais."
+    "Eu estou pensando em acabar com tudo."
+    "Eu quero acabar com a minha vida."
+    "Seria melhor se eu não estivesse aqui."
+    "Eu não vejo saída."
+    "Eu não posso continuar assim."
+    "Eu só quero que tudo acabe."
+    "Eu estou cansado de viver."
+
+-Frases Indiretas:
+    "Ninguém se importaria se eu desaparecesse."
+    "Você sentiria falta de mim se eu fosse embora?"
+    "Eu só quero dormir e nunca mais acordar."
+    "Eu sou um fardo para todos."
+    "As coisas nunca vão melhorar."
+    "Eu sou inútil."
+    "Eu gostaria de sumir."
+    "As pessoas estariam melhor sem mim."
+    "A dor é insuportável."
