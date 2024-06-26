@@ -1,4 +1,3 @@
-from flask import Flask,render_template, request, Response
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
@@ -6,7 +5,7 @@ import os
 load_dotenv()
 
 cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-modelo = "gpt-3.5-turbo"
+modelo = "gpt-4o"
 
 personas = {
     #(12-16 anos)
@@ -25,7 +24,7 @@ personas = {
 """Eu sou um amigo sábio e empático, pronto para te ajudar a enfrentar os desafios da vida com serenidade e clareza. Minha abordagem é mais calma e madura, com uma comunicação clara e direta. Uso linguagem formal e motivadora, focando em questões como carreira, família, saúde mental e bem-estar. Estou aqui para oferecer apoio constante e te ajudar a encontrar paz e realização em todas as áreas da sua vida."""
 }
 
-def selecionar_persona(idade_usuario):
+def selecionar_atributo_persona(idade_usuario):
     if 12 <= idade_usuario <= 16:
         return "Adolescente"
     elif 17 <= idade_usuario <= 20:
@@ -34,3 +33,9 @@ def selecionar_persona(idade_usuario):
         return "AdultoJovem"
     elif idade_usuario >= 28:
         return "Adulto"
+    
+def retorno_personalidade(idade_usuario):
+    personalidade = personas[selecionar_atributo_persona(idade_usuario)]
+    if personalidade is None:
+        raise ValueError("Descrição da personalidade não encontrada.")
+    return personalidade
