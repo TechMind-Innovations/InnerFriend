@@ -18,3 +18,4 @@ InnerFriend_TechMind
 Comando para adicionar as requirements:
 pip install -r requirements.txt
 
+.venv\Scripts\activate

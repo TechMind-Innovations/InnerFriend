@@ -1,8 +1,6 @@
 from app import create_app
 import os
 
-print("DATABASE_URL:", os.getenv('DATABASE_URL'))  # Verificar o valor da variável de ambiente
-
 app = create_app()
 
 if __name__ == '__main__':

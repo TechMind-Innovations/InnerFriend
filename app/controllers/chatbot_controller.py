@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from app.services.chatbot_service import bot
+from ..services.chatbot_service import bot
 
 class ChatbotController:    
     def chat(self):
